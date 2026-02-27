@@ -14,12 +14,29 @@ public class InventarioApplication {
 
 		SpringApplication.run(InventarioApplication.class, args);
 
+
+		System.out.println();
+
+		System.out.println();
+		System.out.println();
+		System.out.println();
+		System.out.println();
+		System.out.println();
+
+
 		Produto produto = new Produto();
 		produto.setDescricao("Camisa tamanho M");
 		produto.setPreco(600.0);
 		produto.setEstoque(100);
 
 		System.out.println(produto);
+
+		System.out.println();
+		System.out.println();
+		System.out.println();
+		System.out.println();
+		System.out.println();
+
 	}
 
 
