@@ -7,11 +7,9 @@ import com.iansistemas.inventario.service.ProdutoService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+import java.sql.SQLOutput;
 import java.util.List;
 
 //Essa anotação é uma combinação de duas coisas:
@@ -66,5 +64,42 @@ public class ProdutoController {
 //        }
 //        return produto;
 //    }
+
+
+
+        @PostMapping("/produtos")
+        public Produto adicionarProduto(@RequestBody Produto produto){
+
+            System.out.println();
+            System.out.println();
+            System.out.println();
+            System.out.println();
+            System.out.println();
+
+
+            logger.info("Produto a ser adicionado: " + produto);
+
+            System.out.println();
+            System.out.println();
+            System.out.println();
+            System.out.println();
+            System.out.println();
+            System.out.println();
+            System.out.println();
+
+
+
+            return this.produtoService.salvarProduto(produto);
+        }
+
+
+
+
+
+
+
+
+
+
 
 }

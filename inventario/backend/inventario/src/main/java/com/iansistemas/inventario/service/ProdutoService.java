@@ -30,9 +30,9 @@ public class ProdutoService implements IProdutoService {
     }
 
     @Override
-    public void salvarProduto(Produto produto) {
+    public Produto salvarProduto(Produto produto) {
 
-        this.produtoRepository.save(produto);
+        return this.produtoRepository.save(produto);
 
     }
 
