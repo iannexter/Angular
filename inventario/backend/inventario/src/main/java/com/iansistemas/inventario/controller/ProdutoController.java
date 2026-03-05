@@ -1,12 +1,14 @@
 package com.iansistemas.inventario.controller;
 
 
+import com.iansistemas.inventario.exceptions.RecursoNaoEncontrado;
 import com.iansistemas.inventario.model.Produto;
 import com.iansistemas.inventario.repository.ProdutoRepository;
 import com.iansistemas.inventario.service.ProdutoService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.sql.SQLOutput;
@@ -91,9 +93,73 @@ public class ProdutoController {
 
             return this.produtoService.salvarProduto(produto);
         }
+    //multiplos cadastros via json:
+    //cadastrar vários produtos
+    //
+    //controller para receber uma lista:
+    //
+    //@PostMapping("/produtos")
+    //public List<Produto> adicionarProdutos(@RequestBody List<Produto> produtos){
+    //    return produtoService.salvarProdutos(produtos);
+    //}
+    //
+    //classe service:
+    //
+    //public List<Produto> salvarProdutos(List<Produto> produtos){
+    //    return produtoRepository.saveAll(produtos);
+    //}
+    //
+    //
 
 
 
+
+
+
+        //A classe ResponseEntity é usada no Spring Framework (especialmente no Spring
+        // MVC e Spring Boot) para representar toda a resposta HTTP que será enviada
+        // por um controller.
+        //
+        //Ela permite controlar três partes da resposta HTTP:
+        //
+        //Body (corpo) – os dados que serão retornados
+        //
+        //Status code – código HTTP (200, 404, 500, etc.)
+        //
+        //Headers – cabeçalhos HTTP da resposta
+        //
+        //Ou seja, em vez de retornar só um objeto, você retorna uma resposta HTTP completa.
+        @GetMapping("/produtos/{id}")
+                                                            //capturar valores que vêm na URL
+                                                            // (no caminho da rota) e passá-los
+                                                            // como parâmetros
+                                                            // para o
+                                                            // metodo
+                                                            // do controller.
+        public ResponseEntity<Produto> buscarProdutoPeloId(@PathVariable int id){
+
+            Produto produto = this.produtoService.buscarProdutoPeloId(id);
+
+            if (produto != null){
+
+                return ResponseEntity.ok(produto);
+
+            } else {
+                System.out.println();
+                System.out.println();
+                System.out.println();
+                System.out.println();
+                System.out.println("Cliente procutou um produto que não foi encrontrado de ID: " + id);
+                System.out.println();
+                System.out.println();
+                System.out.println();
+                System.out.println();
+                throw new RecursoNaoEncontrado("Não foi encontrado o id: " + id);
+
+            }
+
+
+        }
 
 
 
