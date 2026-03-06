@@ -161,9 +161,24 @@ public class ProdutoController {
 
         }
 
+        @PutMapping("/produtos/{id}")
+        public ResponseEntity<Produto> atualizarProduto(@PathVariable int id,
 
+              //transformar aquilo que foi enviado em um objeto
+              @RequestBody Produto produtoRecebido
 
+        ){
 
+            Produto produto = this.produtoService.buscarProdutoPeloId(id);
+            produto.setDescricao(produtoRecebido.getDescricao());
+            produto.setPreco(produtoRecebido.getPreco());
+            produto.setEstoque(produtoRecebido.getEstoque());
+
+            //salvar tudo
+            this.produtoService.salvarProduto(produto);
+
+            return ResponseEntity.ok(produto);
+        }
 
 
 
