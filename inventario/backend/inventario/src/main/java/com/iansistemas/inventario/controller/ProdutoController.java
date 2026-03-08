@@ -12,7 +12,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.sql.SQLOutput;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 //Essa anotação é uma combinação de duas coisas:
 //
@@ -36,6 +38,14 @@ public class ProdutoController {
 
         List<Produto> produtos = this.produtoService.listarProdutos();
         logger.info("Produtos obtidos: ");
+        System.out.println("Produtos obtidos: ");
+
+                for(Produto p : produtos){
+
+            System.out.println(p);
+
+        }
+
 
 
         //for (Produto produto : produtos) {
@@ -181,6 +191,30 @@ public class ProdutoController {
         }
 
 
+
+
+
+
+
+        @DeleteMapping("/produtos/{id}")
+        public ResponseEntity<Map<String, Boolean>> excluirProduto(@PathVariable int id) {
+
+            Produto produto = this.produtoService.buscarProdutoPeloId(id);
+
+            if (produto == null) {
+                throw new RecursoNaoEncontrado("ID do produto informado para ser deletado não existe");
+
+            }
+
+            this.produtoService.excluirProdutoPeloId(produto.getIdproduto());
+
+            Map<String, Boolean> resposta = new HashMap<>();
+
+            resposta.put("Produto Eliminado!", Boolean.TRUE);
+
+            return ResponseEntity.ok(resposta);
+
+        }
 
 
 }
