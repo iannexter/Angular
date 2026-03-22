@@ -25,7 +25,13 @@ import java.util.Map;
 // em vez de retornar o nome de uma view/template.
 @RestController
 @RequestMapping("/inventario") //acesso via http://localhost:8080/inventario
-@CrossOrigin(value = "http://localhost:4200")
+//@CrossOrigin(origins = {
+//        "http://localhost:4200",
+//        "http://192.168.1.13:3000"
+//})
+
+@CrossOrigin(origins = "*")
+
 public class ProdutoController {
 
     private static final Logger logger = LoggerFactory.getLogger(ProdutoController.class);
